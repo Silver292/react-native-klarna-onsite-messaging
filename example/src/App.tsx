@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import { Button, Platform, StyleSheet, Text, View } from 'react-native';
 import {
   KlarnaOnsiteMessagingView,
   KlarnaOSMEnvironment,
@@ -15,6 +15,7 @@ export const PLACEMENT_KEY = Config.PLACEMENT_KEY;
 
 export default function App() {
   const [error, setError] = useState<KlarnaOSMViewError>();
+  const [locale, setLocale] = useState('en-GB');
 
   return (
     <View style={styles.container}>
@@ -23,11 +24,17 @@ export default function App() {
         style={styles.box}
         clientId={CLIENT_ID}
         placementKey={PLACEMENT_KEY}
-        locale={'en-GB'}
-        environment={KlarnaOSMEnvironment.production}
+        locale={locale}
+        environment={KlarnaOSMEnvironment.playground}
         region={KlarnaOSMRegion.EU}
         purchaseAmount={2000}
         onOSMViewError={setError}
+      />
+
+      <Text style={{ marginTop: 30 }}>Klarna On-Site Messaging Demo</Text>
+      <Button
+        title={`Change locale to: ${locale === 'en-GB' ? 'de-DE' : 'en-GB'}`}
+        onPress={() => setLocale((l) => (l === 'en-GB' ? 'de-DE' : 'en-GB'))}
       />
       <Text style={{ marginTop: 30 }}>Klarna On-Site Messaging Demo</Text>
       <Text style={{ marginTop: 20, textAlign: 'center' }}>
